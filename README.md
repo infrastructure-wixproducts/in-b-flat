@@ -1,7 +1,20 @@
-Media and concept from
-http://www.inbflat.net/
+in B♭
+========================================
 
-Media assets
+An interface to autoplay the works from _in Bb 2.0_ and generate some lovely ambiance.
+
+
+
+[http://markfinger.org/in-b-flat](http://markfinger.org/in-b-flat)
+
+
+Credits
+----------------------------------------
+
+Original concept and audio from
+_[in Bb 2.0](http://www.inbflat.net/)_
+
+Original audio assets:
 
 1. https://www.youtube.com/watch?v=gqtYwouDzl4
 2. https://www.youtube.com/watch?v=xevYHoXWX0Y

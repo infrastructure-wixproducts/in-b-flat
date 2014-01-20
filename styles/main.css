@@ -1,0 +1,104 @@
+body {
+  font-size: 100%;
+  color: #333;
+  font-family: 'Open Sans', sans-serif;
+  background-color: rgba(0,0,0,0.02);
+}
+
+.main-container {
+  width: 512px;
+  margin: 0 auto;
+  background: #ffffff;
+  box-shadow: 0 0 20px #e6e6e6;
+  border: 1px solid rgba(0,0,0,0.1);
+  border-top: 0;
+}
+
+header {
+  padding: 1.5em;
+}
+
+.title {
+  float: left;
+  margin: 0;
+  font-size: 4em;
+  font-weight: 600;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.5);
+}
+
+.controls {
+  float: right;
+}
+
+.autoplay {
+  font-size: 2em;
+  line-height: 3.5;
+  cursor: pointer;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.3);
+}
+
+.main {
+  padding: 0 1em;
+}
+
+.audio-element {
+  width: 5em;
+  height: 5em;
+  background-color: #ff5a00;
+  float: left;
+  margin: 0.5em;
+  cursor: pointer;
+  opacity: 0.15;
+  border-radius: 2px;
+  transition: opacity 0.5s, box-shadow 0.5s;
+  position: relative;
+}
+
+.audio-element:hover {
+  opacity: 0.5;
+  box-shadow: 0 0 5px 1px #eee;
+}
+
+.audio-element.playing {
+  opacity: 1;
+  box-shadow: 0 0 5px 1px #ddd;
+}
+
+.number {
+  position: absolute;
+  bottom: 0.2em;
+  left: 0.4em;
+  transition: color;
+  color: #333;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+.playing .number {
+  color: rgba(80, 80, 80, 0.7);
+}
+
+footer {
+  padding: 1.5em;
+}
+
+.credits {
+  text-align: right;
+  font-size: 0.8em;
+}
+
+.credits a {
+  text-decoration: none;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  font-weight: 800;
+  color: inherit;
+}
+
+.cf:before,
+.cf:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.cf:after {
+  clear: both;
+}
