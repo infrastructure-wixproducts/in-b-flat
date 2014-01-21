@@ -3,6 +3,7 @@ body {
   color: #333;
   font-family: 'Open Sans', sans-serif;
   background-color: rgba(0,0,0,0.02);
+  padding: 0;
 }
 
 .main-container {
@@ -50,6 +51,11 @@ header {
   transition: background-color 2s;
 }
 
+.loading-container .icon {
+  opacity: 0;
+  transition: opacity 2s;
+}
+
 .loading .loading-container {
   position: absolute;
   top: 0;
@@ -62,6 +68,7 @@ header {
 }
 
 .loading .loading-container .icon {
+  opacity: 1;
   position: absolute;
   top: 0;
   bottom: 0;
