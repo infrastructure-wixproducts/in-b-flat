@@ -47,7 +47,9 @@ define([
     audio.play();
     return !audio.paused;
   })();
-  var hasPreloaded = false;
+  var preloadStarted = false;
+  var preloadComplete = true;
+  var onPreLoadComplete;
 
 
   var insertElements = function() {
@@ -70,8 +72,9 @@ define([
     });
   };
 
-  var preloadElements = function(callback, afterCount) {
-    hasPreloaded = true;
+  var preloadElements = function() {
+    preloadStarted = true;
+    var afterCount = autoplayTrackCount;
     _.each(audioElements, function(element) {
       var audio = element.find('audio');
 
@@ -79,8 +82,11 @@ define([
         afterCount -= 1;
 
         if (afterCount === 0) {
+          preloadComplete = true;
           $(audioElements).find('audio').off('canplaythrough.preload');
-          callback();
+          if (onPreLoadComplete) {
+            onPreLoadComplete();
+          }
         }
       });
 
@@ -139,9 +145,12 @@ define([
   };
 
   var autoplayToggle = function() {
-    if (!hasPreloaded) {
+    if (!preloadStarted || !preloadComplete) {
       container.addClass('loading');
-      preloadElements(autoplayToggle, autoplayTrackCount);
+      if (!preloadStarted) {
+        preloadElements();
+      }
+      onPreLoadComplete = autoplayToggle;
       return;
     }
 
