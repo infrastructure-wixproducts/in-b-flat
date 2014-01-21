@@ -75,23 +75,25 @@ define([
   var preloadElements = function() {
     preloadStarted = true;
     var afterCount = autoplayTrackCount;
-    _.each(audioElements, function(element) {
-      var audio = element.find('audio');
+    _(audioElements)
+      .shuffle()
+      .each(function(element) {
+        var audio = element.find('audio');
 
-      audio.on('canplaythrough.preload', function() {
-        afterCount -= 1;
+        audio.on('canplaythrough.preload', function() {
+          afterCount -= 1;
 
-        if (afterCount === 0) {
-          preloadComplete = true;
-          $(audioElements).find('audio').off('canplaythrough.preload');
-          if (onPreLoadComplete) {
-            onPreLoadComplete();
+          if (afterCount === 0) {
+            preloadComplete = true;
+            $(audioElements).find('audio').off('canplaythrough.preload');
+            if (onPreLoadComplete) {
+              onPreLoadComplete();
+            }
           }
-        }
-      });
+        });
 
-      audio.get(0).load();
-    });
+        audio.get(0).load();
+      });
   };
 
   var playAudioElement = function(element) {
@@ -118,15 +120,22 @@ define([
     mediaUtils.stop(audio);
   };
 
+  var getPlayableElements = function() {
+    return _.filter(audioElements, function(element) {
+      return (
+        !element.is('.playing') &&
+        element.find('audio').get(0).readyState === 4
+      );
+    });
+  };
+
   var startAutoPlay = function() {
-    var elements = _.sample(audioElements, autoplayTrackCount);
+    var elements = _.sample(getPlayableElements(), autoplayTrackCount);
 
     _.each(elements, playAudioElement);
 
     var autoplayDelayedTrigger = function() {
-      var playableElements = _.filter(audioElements, function(element) {
-        return !element.is('.playing');
-      });
+      var playableElements = getPlayableElements();
 
       if (playableElements.length) {
         var element = _.sample(playableElements);
