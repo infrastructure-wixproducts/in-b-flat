@@ -48,7 +48,7 @@ define([
     return !audio.paused;
   })();
   var preloadStarted = false;
-  var preloadComplete = true;
+  var preloadComplete = false;
   var onPreLoadComplete;
 
 
@@ -145,7 +145,7 @@ define([
   };
 
   var autoplayToggle = function() {
-    if (!preloadStarted || !preloadComplete) {
+    if (!preloadComplete) {
       container.addClass('loading');
       if (!preloadStarted) {
         preloadElements();
