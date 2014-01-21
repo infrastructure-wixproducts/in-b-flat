@@ -42,7 +42,7 @@ define([
     }
 
     if (!isLoaded(element)) {
-      $(element).on('loadedmetadata', function() {
+      $(element).on('canplaythrough', function() {
         play(element);
       });
     }
