@@ -89,11 +89,14 @@ define([
   };
 
   var playAudioElement = function(element) {
-    element.addClass('playing');
-
     var audio = element.find('audio');
 
+    audio.on('playing.playAudioElement', function() {
+      element.addClass('playing');
+    });
+
     audio.on('ended.playAudioElement', function() {
+      audio.off('playing.playAudioElement');
       audio.off('ended.playAudioElement');
       element.removeClass('playing');
     });
@@ -137,8 +140,8 @@ define([
 
   var autoplayToggle = function() {
     if (!hasPreloaded) {
-      preloadElements(autoplayToggle, autoplayTrackCount);
       container.addClass('loading');
+      preloadElements(autoplayToggle, autoplayTrackCount);
       return;
     }
 
