@@ -40,6 +40,14 @@ define([
   // Delay between the triggering of the next audio asset
   var autoplayDelay = (averageDuration / autoplayTrackCount) * 1000;
   var autoplayTimeoutID;
+  // If JS can control the initial play of media elements. This is
+  // likely to be `true` on desktop and `false` on mobile devices.
+  var canPreload = (function() {
+    var audio = document.createElement('audio');
+    audio.play();
+    return !audio.paused;
+  })();
+  var hasPreloaded = false;
 
 
   var insertElements = function() {
@@ -62,9 +70,20 @@ define([
     });
   };
 
-  var preloadElements = function() {
+  var preloadElements = function(callback, afterCount) {
+    hasPreloaded = true;
     _.each(audioElements, function(element) {
       var audio = element.find('audio');
+
+      audio.on('canplay.preload', function() {
+        afterCount -= 1;
+
+        if (afterCount === 0) {
+          $(audioElements).find('audio').off('canplay.preload');
+          callback();
+        }
+      });
+
       audio.get(0).load();
     });
   };
@@ -74,7 +93,8 @@ define([
 
     var audio = element.find('audio');
 
-    audio.on('ended', function() {
+    audio.on('ended.playAudioElement', function() {
+      audio.off('ended.playAudioElement');
       element.removeClass('playing');
     });
 
@@ -116,6 +136,16 @@ define([
   };
 
   var autoplayToggle = function() {
+    if (!hasPreloaded) {
+      preloadElements(autoplayToggle, autoplayTrackCount);
+      container.addClass('loading');
+      return;
+    }
+
+    if (container.hasClass('loading')) {
+      container.removeClass('loading');
+    }
+
     if (!autoplaying) {
       startAutoPlay();
       autoplayText.text('Stop');
@@ -152,7 +182,9 @@ define([
     autoplayIcon = autoplayControl.find('.icon');
 
     insertElements();
-    preloadElements();
+    if (canPreload) {
+      preloadElements();
+    }
     setBindings();
   };
 
