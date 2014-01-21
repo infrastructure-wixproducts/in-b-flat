@@ -75,11 +75,11 @@ define([
     _.each(audioElements, function(element) {
       var audio = element.find('audio');
 
-      audio.on('canplay.preload', function() {
+      audio.on('canplaythrough.preload', function() {
         afterCount -= 1;
 
         if (afterCount === 0) {
-          $(audioElements).find('audio').off('canplay.preload');
+          $(audioElements).find('audio').off('canplaythrough.preload');
           callback();
         }
       });
