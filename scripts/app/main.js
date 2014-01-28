@@ -156,10 +156,10 @@ define([
   var autoplayToggle = function() {
     if (!preloadComplete) {
       container.addClass('loading');
+      onPreLoadComplete = autoplayToggle;
       if (!preloadStarted) {
         preloadElements();
       }
-      onPreLoadComplete = autoplayToggle;
       return;
     }
 
