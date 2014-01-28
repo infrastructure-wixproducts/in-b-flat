@@ -60,8 +60,8 @@ define([
             number +
           '</span>' +
           '<audio>' +
-            '<source src="audio/' + number + '.mp3">' +
-            '<source src="audio/' + number + '.ogg">' +
+            '<source type="audio/mpeg" src="audio/' + number + '.mp3">' +
+            '<source type="audio/ogg" src="audio/' + number + '.ogg">' +
           '</audio>' +
         '</div>'
       );
