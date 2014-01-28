@@ -59,7 +59,7 @@ define([
           '<span class="number">' +
             number +
           '</span>' +
-          '<audio>' +
+          '<audio preload="metadata">' +
             '<source type="audio/mpeg" src="audio/' + number + '.mp3">' +
             '<source type="audio/ogg" src="audio/' + number + '.ogg">' +
           '</audio>' +
