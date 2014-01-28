@@ -80,7 +80,9 @@ define([
       .each(function(element) {
         var audio = element.find('audio');
 
+        console.log('loading: ' + audio.get(0));
         audio.on('canplaythrough.preload', function() {
+          console.log('loaded: ' + audio.get(0), 'aftercount: ' + afterCount);
           afterCount -= 1;
 
           if (afterCount === 0) {
