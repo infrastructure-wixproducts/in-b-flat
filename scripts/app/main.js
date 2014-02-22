@@ -85,7 +85,7 @@ define([
           console.log('loaded: ' + audio.get(0), 'aftercount: ' + afterCount);
           afterCount -= 1;
 
-          if (afterCount === 0) {
+          if (afterCount <= 0) {
             preloadComplete = true;
             $(audioElements).find('audio').off('canplay.preload');
             if (onPreLoadComplete) {
