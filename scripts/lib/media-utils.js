@@ -24,7 +24,12 @@ define([
   var load = function(element) {
     element = _unwrapElement(element);
     if (element.readyState !== 4) {
-      element.load();
+      var originalVolume = element.volume;
+      element.volume = 0;
+      element.play();
+      element.pause();
+      element.volume = originalVolume;
+      element.currentTime = 0;
     }
   };
 
