@@ -29,7 +29,6 @@ define([
       element.play();
       element.pause();
       element.volume = originalVolume;
-      element.currentTime = 0;
     }
   };
 
