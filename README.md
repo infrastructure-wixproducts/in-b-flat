@@ -1,17 +1,12 @@
 in B♭
 ========================================
 
-An interface to autoplay the works from _in Bb 2.0_.
-
 Meshes multiple audio sources together to generate some ambiance.
 
 http://markfinger.org/in-b-flat
 
 Credits
 ----------------------------------------
-
-Original concept and audio from
-_[in Bb 2.0](http://www.inbflat.net/)_
 
 Original audio assets:
 
