@@ -94,7 +94,7 @@ define([
           }
         });
 
-        audio.get(0).load();
+        mediaUtils.load(audio);
       });
   };
 
