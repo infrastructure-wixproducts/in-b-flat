@@ -37,7 +37,7 @@ define([
     108.486531
   ];
   var averageDuration = _.reduce(durations, function(x, y) { return x + y; }) / durations.length;
-  // Delay between the triggering of the next audio asset
+  // The delay before triggering the next audio asset
   var autoplayDelay = (averageDuration / autoplayTrackCount) * 1000;
   var autoplayTimeoutID;
   // If JS can control the initial play of media elements. This is
@@ -59,7 +59,7 @@ define([
           '<span class="number">' +
             number +
           '</span>' +
-          '<audio preload="metadata">' +
+          '<audio>' +
             '<source type="audio/mpeg" src="audio/' + number + '.mp3">' +
             '<source type="audio/ogg" src="audio/' + number + '.ogg">' +
           '</audio>' +
@@ -81,13 +81,13 @@ define([
         var audio = element.find('audio');
 
         console.log('loading: ' + audio.get(0));
-        audio.on('canplaythrough.preload', function() {
+        audio.on('canplay.preload', function() {
           console.log('loaded: ' + audio.get(0), 'aftercount: ' + afterCount);
           afterCount -= 1;
 
           if (afterCount === 0) {
             preloadComplete = true;
-            $(audioElements).find('audio').off('canplaythrough.preload');
+            $(audioElements).find('audio').off('canplay.preload');
             if (onPreLoadComplete) {
               onPreLoadComplete();
             }
